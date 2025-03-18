@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.template.context_processors import request
 from django.urls import reverse
 
@@ -22,6 +23,8 @@ class Human(models.Model):
     is_published = models.BooleanField(choices=Status.choices, default=Status.DRAFT)
     cat = models.ForeignKey("Category", on_delete=models.PROTECT, null=True)
     tags = models.ManyToManyField("TagPost", blank=True, related_name="tags")
+    husband = models.OneToOneField("Husband", on_delete=models.SET_NULL, null=True,
+                                   blank=True, related_name="husband")
 
     objects = models.Manager()
     published = PublishedModel()
@@ -58,3 +61,10 @@ class TagPost(models.Model):
 
     def get_absolute_url(self):
         return reverse("tag", kwargs={"tag_slug": self.slug})
+
+class Husband(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField(null=True)
+
+    def __str__(self):
+        return self.name
