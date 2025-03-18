@@ -17,33 +17,12 @@ menu = [
     {"title": "Войти", "url_name": "login"},
 ]
 
-data_db = [
-    {
-        "id": 1,
-        "title": "Анджелина Джоли",
-        "content": "Биография Анджелины Джоли",
-        "is_published": True,
-    },
-    {
-        "id": 2,
-        "title": "Марго Робби",
-        "content": "Биография Марго Робби",
-        "is_published": False,
-    },
-    {
-        "id": 3,
-        "title": "Джулия Робертс",
-        "content": "Биография Джулии Робертс",
-        "is_published": True,
-    },
-]
-
 
 def index(request):
     data = {
         "title": "Главная страница",
         "menu": menu,
-        "posts": Human.published.all(),
+        "posts": Human.published.all().select_related('cat'),
         "cat_selected": 0,
     }
     return render(request, "human/index.html", context=data)
@@ -74,7 +53,7 @@ def contact(request):
 
 def category(request, cat_slug):
     all_category = get_object_or_404(Category, slug=cat_slug)
-    posts = Human.published.filter(cat_id=all_category.pk)
+    posts = Human.published.filter(cat_id=all_category.pk).select_related('cat')
 
     data = {
         "title": f"Рубрика: {all_category.name}",
@@ -91,7 +70,7 @@ def page_not_found(request, exception):
 
 def show_tag_postlist(request, tag_slug):
     tag = get_object_or_404(TagPost, slug=tag_slug)
-    posts = tag.tags.filter(is_published=Human.Status.PUBLISH)
+    posts = tag.tags.filter(is_published=Human.Status.PUBLISH).select_related('cat')
     data = {
         "title": f'Теги: {tag.tag}',
         "menu": menu,
