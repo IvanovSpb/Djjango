@@ -76,3 +76,22 @@ class Husband(models.Model):
 
     def __str__(self):
         return self.name
+
+class Menu(models.Model):
+    title = models.CharField(max_length=100, db_index=True, unique=True)
+    url_name = models.SlugField(max_length=255, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        if self.url_name == "home":
+            return reverse("home")
+        elif self.url_name == "about":
+            return reverse("about")
+        elif self.url_name == "addpage":
+            return reverse("addpage")
+        elif self.url_name == "login":
+            return reverse("login")
+        elif self.url_name == "contact":
+            return reverse("contact")

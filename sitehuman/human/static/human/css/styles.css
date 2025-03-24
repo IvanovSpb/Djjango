@@ -76,7 +76,7 @@ ul.list-articles li {
 .clear {clear: both;}
 
 .header {
-	background: #3F4137;
+	background: #46472b;
 	height: 60px;
 }
 
@@ -91,7 +91,7 @@ ul.mainmenu {
 	margin: 0;
 	padding: 0;
 	height: 60px;
-	color: #fdc073;
+	color: #1f9789;
 	font-size: 20px;
 	overflow: hidden;
 }
@@ -406,4 +406,25 @@ ul.lang-list li a:hover {color: #fdc073;}
 .form-button {
     min-width: 200px;
     font-size: 16px;
+}
+/* Стиль для label (form-label) */
+.form-label {
+  display: block; /* Занимает всю ширину строки */
+  margin-bottom: 0.5em; /* Отступ снизу */
+  font-weight: 500; /* Полужирное начертание */
+  color: #333; /* Темно-серый цвет текста */
+  transition: color 0.3s ease; /* Плавный переход цвета */
+}
+
+.form-label:hover {
+  color: #007bff; /* Синий цвет при наведении (можно заменить) */
+}
+
+/* Стиль для ошибок (form-error) */
+.form-error {
+  display: block; /* Занимает всю ширину строки */
+  margin-top: 0.25em; /* Отступ сверху */
+  font-size: 0.875em; /* Размер шрифта немного меньше */
+  color: #dc3545; /* Красный цвет ошибки */
+  font-style: italic; /* Курсив */
 }

@@ -1,0 +1,17 @@
+{% if menu %}
+    <div class="header">
+        <ul id="mainmenu" class="mainmenu">
+            <li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
+            {% for m in menu %}
+                {% if 'login' in m.url_name %}
+                    <li class="last">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="{{ m.get_absolute_url }}">{{ m.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="clear"></div>
+    </div>
+{% endif %}
